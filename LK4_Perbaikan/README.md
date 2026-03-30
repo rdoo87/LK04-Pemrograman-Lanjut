@@ -48,7 +48,8 @@ javapublic boolean validatePIN(int InputPin, int StoredPin) { ... }
 
 5. ProtocolKeamanan.ValidateTransaction — logika terbalik
 File: ProtocolKeamanan.java, baris 45
-java// SEBELUM — return true jika BERBEDA (logika terbalik)
+
+// SEBELUM — return true jika BERBEDA (logika terbalik)
 public boolean ValidateTransaction(int asalRekening, int tujuanRekening) {
     return tujuanRekening != asalRekening;
 }
@@ -58,7 +59,7 @@ public boolean ValidateTransaction(int asalRekening, int tujuanRekening) {
     return tujuanRekening == asalRekening;
 }
 Cara pakainya di Main.java baris 103:
-javaif (pk.ValidateTransaction(rekeningUser.getNomorRekening(), tujuan)) {
+if (pk.ValidateTransaction(rekeningUser.getNomorRekening(), tujuan)) {
     System.out.println("Tidak bisa transfer ke rekening sendiri!");
     break;
 }
@@ -67,7 +68,8 @@ Dengan logika != yang lama, kondisi if akan true justru saat rekening berbeda �
 6. Main.java — in.nextLine() untuk membersihkan buffer
 File: Main.java, beberapa titik
 nextInt() dan nextLong() tidak mengambil karakter newline \n setelah angka diinput. Jika langsung diikuti nextLine() untuk baca nama/string, yang terbaca adalah string kosong "".
-java// SEBELUM — setelah nextInt() PIN di Sign Up, tidak ada nextLine()
+
+// SEBELUM — setelah nextInt() PIN di Sign Up, tidak ada nextLine()
 System.out.println("Masukan PIN      : ");
 int PIN = in.nextInt();
 // langsung lanjut ke proses berikutnya → buffer masih kotor
