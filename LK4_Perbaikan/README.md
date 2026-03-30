@@ -3,7 +3,9 @@ Pada kode sebelumnya terdapat banyak error, berikut error dan perbaikannya:
 1. Package Mismatch
 File yang terdampak: Transaksi.java, TransaksiDigital.java, TransferGlobal.java, Rekening.java, RekeningValas.java, ProsesTransaksi.java
 Keenam file ini punya package LK04_Pemlan; di baris pertama, sedangkan Main.java, ProtocolKeamanan.java, dan LayananInternasional.java tidak punya package sama sekali. Akibatnya compiler menganggap mereka berada di package berbeda dan tidak bisa saling mengakses.
-java// SEBELUM — baris 1 di Transaksi.java, Rekening.java, dll.
+
+
+// SEBELUM — baris 1 di Transaksi.java, Rekening.java, dll.
 package LK04_Pemlan;
 
 // SESUDAH — baris tersebut dihapus di semua file
@@ -11,7 +13,8 @@ package LK04_Pemlan;
 
 2. RekeningValas — keyword abstract
 File: RekeningValas.java, baris 4
-java// SEBELUM
+
+// SEBELUM
 public abstract class RekeningValas extends Rekening implements TransferGlobal {
 
 // SESUDAH
@@ -23,7 +26,8 @@ File: RekeningValas.java, baris terakhir method transferInternasional
 Interface LayananInternasional (baris 4) mendeklarasikan:
 javavoid transferInternasional(Rekening rekeningAsal, Rekening rekeningTujuan, long nominal, String mataUang);
 Tapi implementasinya di RekeningValas:
-java// SEBELUM — parameter String mataUang di-comment out
+
+// SEBELUM — parameter String mataUang di-comment out
 public void transferInternasional(Rekening rekeningAsal, Rekening rekeningTujuan, long nominal/*, String mataUang*/) {
 
 // SESUDAH — parameter dikembalikan sesuai interface
@@ -31,7 +35,8 @@ public void transferInternasional(Rekening rekeningAsal, Rekening rekeningTujuan
 
 4. ProsesTransaksi.jalankanTransfer — tipe parameter storedPin salah
 File: ProsesTransaksi.java, baris 15
-java// SEBELUM — storedPin bertipe String
+
+// SEBELUM — storedPin bertipe String
 public boolean jalankanTransfer(int rekAsal, int rekTujuan, long nominal, int inputPin, String storedPin) {
     if (!protokolKeamanan.validatePIN(inputPin, storedPin)) { // ERROR: validatePIN minta int, bukan String
 
