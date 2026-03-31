@@ -1,3 +1,5 @@
+package LK04_Pemlan;
+
 import java.util.Scanner;
 
 public class Main {
@@ -62,6 +64,14 @@ public class Main {
 
                     System.out.println("Masukan Password : ");
                     int inputPassword = in.nextInt();
+                    
+                    int OTP = pk.GenerateOTP();
+                    System.out.println("otp:"+ OTP);
+                    System.out.println("Masukkan otp:");
+                    int inOTP = in.nextInt();
+                    if (OTP!=inOTP) {
+                        System.out.println("OTP salah!");
+                    }
 
                     if (!pk.ValidatePassword(inputPassword, rekeningUser.getPassword())) {
                         System.out.println("Password salah!");
@@ -117,11 +127,14 @@ public class Main {
                                 if (pk.ValidateTransaction(rekeningUser.getNomorRekening(), tujuan)) {
                                     System.out.println("Tidak bisa transfer ke rekening sendiri!");
                                     break;
-                                }
+                                } 
 
                                 System.out.println("Jumlah Transfer : ");
                                 long jumlah = in.nextLong();
-
+                                if (rekeningUser.saldo <= jumlah) {
+                                    System.out.println("Saldo kamu tidak mencukupi!");
+                                    continue;
+                                }
                                 rekeningUser.transfer(jumlah);
                                 pk.logging("Transfer Berhasil!");
                                 break;
